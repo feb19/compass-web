@@ -39,6 +39,7 @@ function updateArrow(heading) {
   document.getElementById("arrow").style.transform = `translate(-50%, -50%) rotate(${diff}deg)`;
 }
 
+document.addEventListener("DOMContentLoaded", function() {
 const button = document.getElementById("requestPermission");
 
 if (typeof DeviceOrientationEvent !== 'undefined' &&
@@ -70,3 +71,4 @@ if (typeof DeviceOrientationEvent !== 'undefined' &&
     }
   });
 }
+}, false);
