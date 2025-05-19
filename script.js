@@ -39,17 +39,34 @@ function updateArrow(heading) {
   document.getElementById("arrow").style.transform = `translate(-50%, -50%) rotate(${diff}deg)`;
 }
 
-// iOS 対策
+const button = document.getElementById("requestPermission");
+
 if (typeof DeviceOrientationEvent !== 'undefined' &&
     typeof DeviceOrientationEvent.requestPermission === 'function') {
-  document.getElementById("requestPermission").style.display = 'block';
-  document.getElementById("requestPermission").onclick = () => {
+  // iOS対応
+  button.style.display = 'block';
+  button.onclick = () => {
     DeviceOrientationEvent.requestPermission().then(response => {
       if (response === 'granted') {
-        window.addEventListener('deviceorientationabsolute', e => updateArrow(e.alpha));
+        window.addEventListener('deviceorientation', e => {
+          if (e.alpha != null) {
+            updateArrow(e.alpha);
+          }
+        });
+        button.style.display = 'none';
+      } else {
+        alert("センサーのアクセスが拒否されました");
       }
+    }).catch(err => {
+      console.error("センサーアクセス失敗:", err);
+      alert("センサーへのアクセスに失敗しました");
     });
   };
 } else {
-  window.addEventListener('deviceorientationabsolute', e => updateArrow(e.alpha));
+  // Androidなど通常ブラウザ向け
+  window.addEventListener('deviceorientation', e => {
+    if (e.alpha != null) {
+      updateArrow(e.alpha);
+    }
+  });
 }
