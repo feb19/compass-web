@@ -1,4 +1,4 @@
-const target = { lat: 34.77804336035684, lng: 135.38355739973917 };
+const target = { lat: 35.6586, lng: 139.7454 }// lat: 34.77804336035684, lng: 135.38355739973917 };
 let currentLat = null, currentLng = null;
 
 function toRad(deg) {
