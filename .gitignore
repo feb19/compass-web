@@ -1,0 +1,20 @@
+# OSごとの不要ファイル
+.DS_Store
+Thumbs.db
+
+# IDE/エディタ関連
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# npm/yarn 使う場合の依存
+node_modules/
+dist/
+
+# ビルド成果物やログ
+*.log
+
+# PWA対応用のキャッシュファイル（もし将来追加する場合）
+service-worker.js.map
+workbox-*.js
